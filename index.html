@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFT Monalisa · Color</title>
+  <meta name="description" content="Selector de color, armonías y paletas con el código listo para copiar.">
+  <meta name="theme-color" content="#38b6f5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2338b6f5'/%3E%3Cpath d='M9 22V10l7 8 7-8v12' fill='none' stroke='%230f1b2a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="fotos/nino-borrador.webp" type="image/webp">
+
+  <style>
+    a {
+      text-decoration: none;
+      color: var(--cielo-oscuro);
+    }
+
+    /* ---------- Variables ---------- */
+    :root {
+      --fondo: #ffffff;
+      --suave: #f3f7fa;
+      --tinta: #0f1b2a;
+      --gris: #5b6b7b;
+      --linea: #e1e8ef;
+      --cielo: #38b6f5;
+      --cielo-hover: #1ea6ec;
+      --cielo-oscuro: #0a76b2;
+      --cielo-claro: #e4f5fe;
+      --radio: 18px;
+      --radio-control: 10px;
+      --sombra: 0 1px 2px rgba(15, 27, 42, 0.04), 0 16px 40px -24px rgba(15, 27, 42, 0.22);
+      --fuente: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fuente-codigo: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --i-color: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7H16a5 5 0 0 0 5-5c0-4.1-4-7.2-9-7.2z'/%3E%3Ccircle cx='7.5' cy='11.5' r='1'/%3E%3Ccircle cx='10.5' cy='7.5' r='1'/%3E%3Ccircle cx='15.5' cy='8.5' r='1'/%3E%3C/svg%3E");
+      --i-texto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h10'/%3E%3C/svg%3E");
+      --i-fotos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='2'/%3E%3Cpath d='m21 16-5-5-9 9'/%3E%3C/svg%3E");
+      --i-copiar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h8'/%3E%3C/svg%3E");
+      --i-azar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 3h5v5'/%3E%3Cpath d='M4 20 21 3'/%3E%3Cpath d='M21 16v5h-5'/%3E%3Cpath d='m15 15 6 6'/%3E%3Cpath d='m4 4 5 5'/%3E%3C/svg%3E");
+      --i-gotero: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 22 1-1h3l9-9'/%3E%3Cpath d='M3 21v-3l9-9'/%3E%3Cpath d='m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4z'/%3E%3C/svg%3E");
+      --i-izquierda: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 6-6 6 6 6'/%3E%3C/svg%3E");
+      --i-derecha: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E");
+      color-scheme: light;
+    }
+
+    /* ---------- Base ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--fuente);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    figure,
+    ul,
+    ol,
+    menu,
+    fieldset {
+      margin: 0;
+    }
+
+    ul,
+    ol,
+    menu {
+      padding: 0;
+      list-style: none;
+    }
+
+    fieldset {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      padding: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    select,
+    output,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: var(--cielo);
+      color: var(--tinta);
+    }
+
+    /* ---------- Iconos ---------- */
+    [data-icono]::before {
+      content: "";
+      flex: none;
+      width: 18px;
+      height: 18px;
+      background: currentColor;
+      -webkit-mask: var(--icono) center / contain no-repeat;
+      mask: var(--icono) center / contain no-repeat;
+    }
+
+    [data-icono="color"] {
+      --icono: var(--i-color);
+    }
+
+    [data-icono="texto"] {
+      --icono: var(--i-texto);
+    }
+
+    [data-icono="fotos"] {
+      --icono: var(--i-fotos);
+    }
+
+    [data-icono="copiar"] {
+      --icono: var(--i-copiar);
+    }
+
+    [data-icono="azar"] {
+      --icono: var(--i-azar);
+    }
+
+    [data-icono="gotero"] {
+      --icono: var(--i-gotero);
+    }
+
+    [data-icono="izquierda"] {
+      --icono: var(--i-izquierda);
+    }
+
+    [data-icono="derecha"] {
+      --icono: var(--i-derecha);
+    }
+
+    /* ---------- Cabecera: tres botones para moverse ---------- */
+    body > header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--linea);
+      background: rgba(255, 255, 255, 0.88);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    body > header nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    body > header nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    body > header nav a:hover:not([aria-current="page"]) {
+      border-color: var(--cielo);
+      box-shadow: 0 8px 18px -10px rgba(56, 182, 245, 0.7);
+      transform: translateY(-1px);
+    }
+
+    body > header nav a[aria-current="page"] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    /* ---------- Contenido ---------- */
+    main {
+      flex: 1;
+      width: min(1120px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    main > section {
+      padding-block: clamp(28px, 5vw, 56px);
+    }
+
+    main article {
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      background: var(--fondo);
+      box-shadow: var(--sombra);
+    }
+
+    /* Botones */
+    main button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s;
+    }
+
+    main button:hover:not(:disabled) {
+      border-color: var(--cielo);
+    }
+
+    main button:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    main button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    main button[aria-pressed="true"],
+    main button[data-principal] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main button[data-principal]:hover:not(:disabled) {
+      border-color: var(--cielo-hover);
+      background: var(--cielo-hover);
+    }
+
+    /* Opciones tipo píldora (radios) */
+    main label:has(> input[type="radio"]) {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      color: var(--tinta);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    main label:has(> input[type="radio"]):hover {
+      border-color: var(--cielo);
+    }
+
+    main label > input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    main label:has(> input[type="radio"]:checked) {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main label:has(> input[type="radio"]:focus-visible) {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    main label:has(> input[type="radio"]:disabled) {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Campos */
+    main input[type="number"],
+    main input[type="text"],
+    main select {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    main input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    main input[type="number"]::-webkit-outer-spin-button,
+    main input[type="number"]::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+
+    main input:hover,
+    main select:hover {
+      border-color: #c9d6e2;
+    }
+
+    main input:focus-visible,
+    main select:focus-visible {
+      outline: none;
+      border-color: var(--cielo);
+      box-shadow: 0 0 0 3px rgba(56, 182, 245, 0.25);
+    }
+
+    main input[type="range"] {
+      width: 100%;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    main label:has(> input[type="checkbox"]) {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--tinta);
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    main input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    /* ---------- Pie ---------- */
+    body > footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px 20px;
+      width: min(1120px, 100% - 32px);
+      margin: 40px auto 0;
+      padding-block: 22px 28px;
+      border-top: 1px solid var(--linea);
+      color: var(--gris);
+      font-size: 0.875rem;
+    }
+
+    body > footer strong {
+      color: var(--tinta);
+      font-weight: 600;
+    }
+
+    /* ---------- Aviso ---------- */
+    body > output {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      z-index: 30;
+      max-width: min(92vw, 440px);
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--tinta);
+      color: #ffffff;
+      font-size: 0.9rem;
+      box-shadow: 0 14px 32px -14px rgba(15, 27, 42, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 16px);
+      transition: opacity 0.2s, transform 0.25s;
+    }
+
+    body > output[data-visible] {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Área temporal para copiar en navegadores antiguos */
+    body > textarea {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    @media (max-width: 520px) {
+      body > header {
+        padding-inline: 10px;
+      }
+
+      body > header nav {
+        gap: 6px;
+      }
+
+      body > header nav a {
+        gap: 6px;
+        padding: 9px 14px;
+        font-size: 0.9rem;
+      }
+
+      body > header nav a[data-icono]::before {
+        width: 16px;
+        height: 16px;
+      }
+
+      body > footer {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+      }
+    }
+
+    /* ---------- Portada ---------- */
+    main > section:first-of-type {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+      align-items: center;
+      gap: 24px 48px;
+      padding-block: clamp(32px, 6vw, 72px) clamp(8px, 2vw, 24px);
+    }
+
+    main > section:first-of-type h1 {
+      font-size: clamp(3rem, 9vw, 6.6rem);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+    }
+
+    main > section:first-of-type hgroup p {
+      margin-top: 18px;
+      color: var(--gris);
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    }
+
+    main > section:first-of-type figure {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 330px);
+    }
+
+    /* Sombra en el suelo: más ligera que un filtro sobre la imagen animada */
+    main > section:first-of-type figure::before {
+      content: "";
+      position: absolute;
+      left: 4%;
+      right: 32%;
+      bottom: -2%;
+      height: 6%;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(15, 27, 42, 0.22), transparent);
+    }
+
+    main > section:first-of-type img {
+      position: relative;
+      width: 100%;
+      transform-origin: 30% 98%;
+      animation: frotar 3.6s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Migas de goma que caen mientras borra */
+    main > section:first-of-type figure::after {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: 70%;
+      width: 28%;
+      height: 20%;
+      background:
+        radial-gradient(circle at 20% 15%, #d99aa0 0 3px, transparent 3.5px),
+        radial-gradient(circle at 62% 35%, #c4858b 0 2.5px, transparent 3px),
+        radial-gradient(circle at 38% 62%, #e2aab0 0 3.5px, transparent 4px),
+        radial-gradient(circle at 82% 72%, #c4858b 0 2px, transparent 2.5px);
+      opacity: 0;
+      pointer-events: none;
+      animation: migas 3.6s ease-in infinite;
+    }
+
+    @keyframes frotar {
+      0%,
+      44%,
+      100% {
+        transform: rotate(0);
+      }
+
+      6%,
+      18%,
+      30% {
+        transform: rotate(1.6deg) translate(2px, -1px);
+      }
+
+      12%,
+      24% {
+        transform: rotate(-1.1deg);
+      }
+
+      37% {
+        transform: rotate(-0.6deg);
+      }
+    }
+
+    @keyframes migas {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      40% {
+        opacity: 0.9;
+      }
+
+      56%,
+      100% {
+        opacity: 0;
+        transform: translateY(70px);
+      }
+    }
+
+    main > section:nth-of-type(2) > h2,
+    main > section:nth-of-type(4) > h2 {
+      margin-bottom: 18px;
+    }
+
+    main article menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    main article label:has(> select) {
+      display: grid;
+      gap: 6px;
+      color: var(--gris);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    main select {
+      color: var(--tinta);
+      cursor: pointer;
+    }
+
+    main button[data-icono]:empty {
+      width: 42px;
+      padding: 0;
+    }
+
+    /* Muestras de color (se copian con un clic) */
+    main button[data-hex] {
+      border: 0;
+      background: var(--muestra);
+      color: var(--tinta);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    main button[data-hex][data-tono="oscuro"] {
+      color: #ffffff;
+    }
+
+    /* ---------- Selector de color ---------- */
+    main > section:nth-of-type(2) > article {
+      --h: 200;
+      --x: 77;
+      --y: 4;
+      --color: #38b6f5;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 40px;
+      padding: clamp(18px, 3vw, 30px);
+    }
+
+    main > section:nth-of-type(2) article > header {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 18px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(2) article > header > span {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--color);
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.1);
+    }
+
+    main > section:nth-of-type(2) article > header button {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 6px 14px;
+      line-height: 1.3;
+    }
+
+    main > section:nth-of-type(2) article > header small {
+      color: var(--gris);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+
+    main > section:nth-of-type(2) article > header strong {
+      font-size: 1rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    main > section:nth-of-type(2) article > section {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    /* Caja de saturación y brillo */
+    main > section:nth-of-type(2) article > section:first-of-type > span {
+      position: relative;
+      display: block;
+      height: 220px;
+      border-radius: 12px;
+      background:
+        linear-gradient(to top, #000000, transparent),
+        linear-gradient(to right, #ffffff, transparent),
+        hsl(var(--h) 100% 50%);
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    main > section:nth-of-type(2) article > section:first-of-type > span::after {
+      content: "";
+      position: absolute;
+      left: calc(var(--x) * 1%);
+      top: calc(var(--y) * 1%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background: var(--color);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Barra de tono */
+    main > section:nth-of-type(2) input[type="range"] {
+      height: 16px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    main > section:nth-of-type(2) input[type="range"]::-webkit-slider-thumb {
+      width: 24px;
+      height: 24px;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      background: hsl(var(--h) 100% 50%);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
+      -webkit-appearance: none;
+    }
+
+    main > section:nth-of-type(2) input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      background: hsl(var(--h) 100% 50%);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    main > section:nth-of-type(2) input[type="range"]::-moz-range-track {
+      background: transparent;
+    }
+
+    main > section:nth-of-type(2) article > section:first-of-type label {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      color: var(--gris);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Armonía */
+    main > section:nth-of-type(2) article > section:nth-of-type(2) ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 64px;
+    }
+
+    main > section:nth-of-type(2) article > section:nth-of-type(2) ul button {
+      width: 64px;
+      height: 64px;
+      padding: 0;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    main > section:nth-of-type(2) article > section:nth-of-type(2) ul button:hover {
+      box-shadow: 0 10px 22px -10px rgba(15, 27, 42, 0.45);
+      transform: scale(1.08);
+    }
+
+    main > section:nth-of-type(2) article > section:nth-of-type(2) > button {
+      justify-self: start;
+    }
+
+    /* ---------- Paletas ---------- */
+    main > section:nth-of-type(3) > header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    main > section:nth-of-type(3) > header menu {
+      display: flex;
+      gap: 8px;
+    }
+
+    main > section:nth-of-type(3) > ul {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 4 * 16px) / 5);
+      gap: 16px;
+      padding: 4px 2px 8px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+
+    main > section:nth-of-type(3) > ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    main > section:nth-of-type(3) > ul[data-arrastrando] {
+      scroll-snap-type: none;
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    main > section:nth-of-type(3) li {
+      display: grid;
+      gap: 10px;
+      scroll-snap-align: start;
+    }
+
+    main > section:nth-of-type(3) li p {
+      display: flex;
+      height: 120px;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.06);
+    }
+
+    main > section:nth-of-type(3) li p button[data-hex] {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 0;
+      height: auto;
+      padding: 0;
+      border-radius: 0;
+      color: transparent;
+      transition: flex-grow 0.25s, color 0.2s;
+    }
+
+    main > section:nth-of-type(3) li p button[data-hex]:hover,
+    main > section:nth-of-type(3) li p button[data-hex]:focus-visible {
+      flex-grow: 2.4;
+      color: var(--tinta);
+    }
+
+    main > section:nth-of-type(3) li p button[data-hex][data-tono="oscuro"]:hover,
+    main > section:nth-of-type(3) li p button[data-hex][data-tono="oscuro"]:focus-visible {
+      color: #ffffff;
+    }
+
+    main > section:nth-of-type(3) li small {
+      color: var(--gris);
+      font-size: 0.85rem;
+    }
+
+    /* ---------- Círculo cromático ---------- */
+    main > section:nth-of-type(4) > article {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: 28px 48px;
+      padding: clamp(18px, 3vw, 30px);
+    }
+
+    main > section:nth-of-type(4) article > section {
+      display: grid;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    main > section:nth-of-type(4) article > section:first-of-type > span {
+      position: relative;
+      display: block;
+      width: min(100%, 300px);
+      aspect-ratio: 1;
+      margin-inline: auto;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, #ffffff 0, rgba(255, 255, 255, 0) 62%),
+        conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.08);
+      container-type: inline-size;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    main > section:nth-of-type(4) article > section:first-of-type > span > span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background: var(--c, #ffffff);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+      transform: translate(-50%, -50%) rotate(var(--a, 0deg)) translateY(-40cqi) rotate(calc(var(--a, 0deg) * -1));
+      pointer-events: none;
+    }
+
+    main > section:nth-of-type(4) article > section:first-of-type > span > span:first-of-type {
+      z-index: 1;
+      width: 28px;
+      height: 28px;
+      border-width: 3px;
+    }
+
+    main > section:nth-of-type(4) article p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    main > section:nth-of-type(4) article p span {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--muestra, #38b6f5);
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.1);
+    }
+
+    main > section:nth-of-type(4) article p strong {
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    main > section:nth-of-type(4) article ul {
+      display: grid;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(15, 27, 42, 0.06);
+    }
+
+    main > section:nth-of-type(4) article ul button {
+      width: 100%;
+      height: 64px;
+      border-radius: 0;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ---------- Adaptación ---------- */
+    @media (max-width: 900px) {
+      main > section:nth-of-type(3) > ul {
+        grid-auto-columns: calc((100% - 2 * 16px) / 3);
+      }
+    }
+
+    @media (max-width: 820px) {
+      main > section:nth-of-type(2) > article,
+      main > section:nth-of-type(4) > article {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      main > section:first-of-type {
+        grid-template-columns: minmax(0, 1fr);
+        text-align: center;
+      }
+
+      main > section:first-of-type figure {
+        width: min(62%, 230px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      main > section:nth-of-type(3) > ul {
+        grid-auto-columns: 78%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Herramientas">
+      <a href="index.html" data-icono="color" aria-current="page">Color</a>
+      <a href="texto.html" data-icono="texto">Texto</a>
+      <a href="fotos.html" data-icono="fotos">Fotos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="titulo">
+      <hgroup>
+        <h1 id="titulo">CFT Monalisa</h1>
+        <p>Color, texto y fotos en tu navegador.</p>
+      </hgroup>
+      <figure>
+        <img src="fotos/nino-borrador.webp" width="543" height="817" alt="Personaje de un mural, de espaldas, borrando la pared con una goma" fetchpriority="high">
+      </figure>
+    </section>
+
+    <section aria-labelledby="t-selector">
+      <h2 id="t-selector">Elige un color</h2>
+      <article>
+        <header>
+          <span aria-hidden="true"></span>
+          <menu aria-label="Copiar código">
+            <li><button type="button" data-formato="hex"><small>HEX</small><strong>#38B6F5</strong></button></li>
+            <li><button type="button" data-formato="rgb"><small>RGB</small><strong>56, 182, 245</strong></button></li>
+            <li><button type="button" data-formato="hsl"><small>HSL</small><strong>200°, 91%, 59%</strong></button></li>
+          </menu>
+        </header>
+
+        <section aria-label="Selector">
+          <span role="slider" tabindex="0" aria-label="Saturación y brillo" aria-valuemin="0" aria-valuemax="100"></span>
+          <input type="range" min="0" max="359" step="1" value="200" aria-label="Tono">
+          <p>
+            <label>HEX <input type="text" maxlength="7" value="#38B6F5" spellcheck="false" autocomplete="off"></label>
+          </p>
+          <menu aria-label="Acciones del color">
+            <li><button type="button" data-accion="copiar" data-icono="copiar" data-principal>Copiar</button></li>
+            <li><button type="button" data-accion="azar" data-icono="azar">Aleatorio</button></li>
+            <li><button type="button" data-accion="gotero" data-icono="gotero" hidden>Cuentagotas</button></li>
+          </menu>
+        </section>
+
+        <section aria-label="Armonía">
+          <label>
+            Armonía
+            <select>
+              <option value="complementario">Complementario</option>
+              <option value="analogo">Análogo</option>
+              <option value="triadico">Triádico</option>
+              <option value="monocromatico" selected>Monocromático</option>
+              <option value="tonos">Tonos</option>
+            </select>
+          </label>
+          <ul aria-label="Colores de la armonía"></ul>
+          <button type="button" data-accion="copiar-paleta" data-icono="copiar">Copiar paleta</button>
+        </section>
+      </article>
+    </section>
+
+    <section aria-labelledby="t-paletas">
+      <header>
+        <h2 id="t-paletas">Paletas</h2>
+        <menu aria-label="Recorrer paletas">
+          <li><button type="button" data-accion="anterior" data-icono="izquierda" aria-label="Paletas anteriores"></button></li>
+          <li><button type="button" data-accion="mezclar" data-icono="azar">Mezclar</button></li>
+          <li><button type="button" data-accion="siguiente" data-icono="derecha" aria-label="Paletas siguientes"></button></li>
+        </menu>
+      </header>
+      <ul aria-label="Paletas de color" tabindex="0"></ul>
+    </section>
+
+    <section aria-labelledby="t-circulo">
+      <h2 id="t-circulo">Círculo cromático</h2>
+      <article>
+        <section aria-label="Rueda">
+          <span role="slider" tabindex="0" aria-label="Tono de la rueda" aria-valuemin="0" aria-valuemax="359">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <p>
+            <span aria-hidden="true"></span>
+            <strong>#38B6F5</strong>
+          </p>
+        </section>
+
+        <section aria-label="Armonía de la rueda">
+          <label>
+            Armonía
+            <select>
+              <option value="complementario">Complementario</option>
+              <option value="analogo" selected>Análogo</option>
+              <option value="triadico">Triádico</option>
+              <option value="monocromatico">Monocromático</option>
+            </select>
+          </label>
+          <ul aria-label="Colores de la rueda"></ul>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <strong>CFT Monalisa</strong>
+    <p>Personalizado por Samir®</p>
+    <small>© 2026</small>
+  </footer>
+
+  <output id="aviso" role="status" aria-live="polite"></output>
+
+  <script>
+    'use strict';
+
+    /* ---------- Utilidades comunes ---------- */
+    const aviso = document.getElementById('aviso');
+    let temporizadorAviso;
+
+    function avisar(mensaje) {
+      aviso.value = mensaje;
+      aviso.toggleAttribute('data-visible', true);
+      clearTimeout(temporizadorAviso);
+      temporizadorAviso = setTimeout(() => aviso.removeAttribute('data-visible'), 2400);
+    }
+
+    async function copiar(texto, mensaje = `Copiado: ${texto}`) {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Sin portapapeles');
+        await navigator.clipboard.writeText(texto);
+      } catch {
+        // Método clásico para navegadores sin portapapeles moderno
+        const enfocado = document.activeElement;
+        const area = document.createElement('textarea');
+        area.value = texto;
+        area.readOnly = true;
+        document.body.append(area);
+        area.select();
+        const copiado = document.execCommand('copy');
+        area.remove();
+        if (enfocado instanceof HTMLElement) enfocado.focus({ preventScroll: true });
+        if (!copiado) {
+          avisar('No se pudo copiar. Selecciónalo y pulsa Ctrl + C.');
+          return false;
+        }
+      }
+      avisar(mensaje);
+      return true;
+    }
+
+    function descargar(blob, nombre) {
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement('a');
+      enlace.href = url;
+      enlace.download = nombre;
+      document.body.append(enlace);
+      enlace.click();
+      enlace.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    function limitar(valor, minimo, maximo) {
+      return Math.min(Math.max(valor, minimo), maximo);
+    }
+
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    /* ---------- Conversión de color ---------- */
+    const tono = (h) => ((h % 360) + 360) % 360;
+
+    function hslAHex(h, s, l) {
+      s /= 100;
+      l /= 100;
+      const k = (n) => (n + h / 30) % 12;
+      const a = s * Math.min(l, 1 - l);
+      const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+      const hex = (x) => Math.round(255 * x).toString(16).padStart(2, '0');
+      return `#${hex(f(0))}${hex(f(8))}${hex(f(4))}`.toUpperCase();
+    }
+
+    function hexARgb(hex) {
+      const numero = parseInt(hex.slice(1), 16);
+      return [(numero >> 16) & 255, (numero >> 8) & 255, numero & 255];
+    }
+
+    function rgbAHex(r, g, b) {
+      return `#${[r, g, b].map((x) => Math.round(x).toString(16).padStart(2, '0')).join('')}`.toUpperCase();
+    }
+
+    function rgbAHsl(r, g, b) {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const l = (max + min) / 2;
+      let h = 0;
+      let s = 0;
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h /= 6;
+      }
+      return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+    }
+
+    function rgbAHsv(r, g, b) {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const max = Math.max(r, g, b);
+      const d = max - Math.min(r, g, b);
+      let h = 0;
+      if (d !== 0) {
+        if (max === r) h = ((g - b) / d) % 6;
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+      }
+      return [tono(h * 60), max === 0 ? 0 : (d / max) * 100, max * 100];
+    }
+
+    function hsvARgb(h, s, v) {
+      h = tono(h);
+      s /= 100;
+      v /= 100;
+      const c = v * s;
+      const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      const m = v - c;
+      const [r, g, b] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x]
+        : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+      return [(r + m) * 255, (g + m) * 255, (b + m) * 255];
+    }
+
+    function normalizarHex(texto) {
+      let valor = String(texto).trim().replace(/^#/, '');
+      if (/^[0-9a-f]{3}$/i.test(valor)) valor = [...valor].map((c) => c + c).join('');
+      return /^[0-9a-f]{6}$/i.test(valor) ? `#${valor.toUpperCase()}` : null;
+    }
+
+    function esClaro(hex) {
+      const [r, g, b] = hexARgb(hex);
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.6;
+    }
+
+    function armonia(h, tipo) {
+      switch (tipo) {
+        case 'complementario': return [h, h + 180].map((x) => hslAHex(tono(x), 55, 50));
+        case 'analogo': return [h - 30, h, h + 30].map((x) => hslAHex(tono(x), 55, 52));
+        case 'triadico': return [h, h + 120, h + 240].map((x) => hslAHex(tono(x), 55, 48));
+        case 'monocromatico': return [22, 38, 54, 70, 86].map((l) => hslAHex(tono(h), 40, l));
+        case 'tonos': return Array.from({ length: 8 }, (_, i) => hslAHex(tono(h), 55, Math.round((i * 100) / 7)));
+        default: return [];
+      }
+    }
+
+    /* ---------- Muestras que se copian con un clic ---------- */
+    function crearMuestra(hex) {
+      const boton = document.createElement('button');
+      boton.type = 'button';
+      boton.dataset.hex = hex;
+      boton.dataset.tono = esClaro(hex) ? 'claro' : 'oscuro';
+      boton.style.setProperty('--muestra', hex);
+      boton.textContent = hex.slice(1);
+      boton.setAttribute('aria-label', `Copiar ${hex}`);
+      return boton;
+    }
+
+    function pintarMuestras(lista, hexes) {
+      lista.replaceChildren(...hexes.map((hex) => {
+        const elemento = document.createElement('li');
+        elemento.append(crearMuestra(hex));
+        return elemento;
+      }));
+    }
+
+    document.addEventListener('click', (evento) => {
+      const muestra = evento.target.closest('button[data-hex]');
+      if (muestra) copiar(muestra.dataset.hex);
+    });
+
+    /* ---------- Selector de color ---------- */
+    const selector = document.querySelector('main > section:nth-of-type(2) > article');
+    const caja = selector.querySelector('section:first-of-type > span');
+    const barraTono = selector.querySelector('input[type="range"]');
+    const entradaHex = selector.querySelector('input[type="text"]');
+    const selectArmonia = selector.querySelector('select');
+    const listaArmonia = selector.querySelector('ul');
+    const lecturas = {
+      hex: selector.querySelector('[data-formato="hex"] strong'),
+      rgb: selector.querySelector('[data-formato="rgb"] strong'),
+      hsl: selector.querySelector('[data-formato="hsl"] strong'),
+    };
+
+    const color = { h: 200, s: 77, v: 96 };
+    let hexActual = '#38B6F5';
+    let armoniaPintada = '';
+    let marcoSelector = 0;
+
+    function pintarSelector() {
+      cancelAnimationFrame(marcoSelector);
+      marcoSelector = requestAnimationFrame(pintarSelectorAhora);
+    }
+
+    function pintarSelectorAhora() {
+      const [r, g, b] = hsvARgb(color.h, color.s, color.v);
+      const [hh, ss, ll] = rgbAHsl(r, g, b);
+      hexActual = rgbAHex(r, g, b);
+
+      selector.style.setProperty('--h', color.h.toFixed(1));
+      selector.style.setProperty('--x', color.s.toFixed(2));
+      selector.style.setProperty('--y', (100 - color.v).toFixed(2));
+      selector.style.setProperty('--color', hexActual);
+
+      lecturas.hex.textContent = hexActual;
+      lecturas.rgb.textContent = `${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}`;
+      lecturas.hsl.textContent = `${hh}°, ${ss}%, ${ll}%`;
+      if (document.activeElement !== entradaHex) entradaHex.value = hexActual;
+      barraTono.value = Math.round(color.h);
+      caja.setAttribute('aria-valuenow', Math.round(color.s));
+      caja.setAttribute('aria-valuetext', `Saturación ${Math.round(color.s)} %, brillo ${Math.round(color.v)} %`);
+
+      // La armonía solo depende del tono: se repinta únicamente si cambia
+      const clave = `${Math.round(color.h)}-${selectArmonia.value}`;
+      if (clave !== armoniaPintada) {
+        armoniaPintada = clave;
+        pintarMuestras(listaArmonia, armonia(Math.round(color.h), selectArmonia.value));
+      }
+    }
+
+    function fijarDesdeHex(hex) {
+      [color.h, color.s, color.v] = rgbAHsv(...hexARgb(hex));
+      pintarSelector();
+    }
+
+    function moverCaja(evento) {
+      const zona = caja.getBoundingClientRect();
+      color.s = limitar((evento.clientX - zona.left) / zona.width, 0, 1) * 100;
+      color.v = (1 - limitar((evento.clientY - zona.top) / zona.height, 0, 1)) * 100;
+      pintarSelector();
+    }
+
+    caja.addEventListener('pointerdown', (evento) => {
+      caja.setPointerCapture(evento.pointerId);
+      moverCaja(evento);
+    });
+
+    caja.addEventListener('pointermove', (evento) => {
+      if (caja.hasPointerCapture(evento.pointerId)) moverCaja(evento);
+    });
+
+    caja.addEventListener('keydown', (evento) => {
+      const paso = evento.shiftKey ? 10 : 2;
+      const cambios = { ArrowLeft: ['s', -paso], ArrowRight: ['s', paso], ArrowDown: ['v', -paso], ArrowUp: ['v', paso] };
+      const cambio = cambios[evento.key];
+      if (!cambio) return;
+      evento.preventDefault();
+      color[cambio[0]] = limitar(color[cambio[0]] + cambio[1], 0, 100);
+      pintarSelector();
+    });
+
+    barraTono.addEventListener('input', () => {
+      color.h = Number(barraTono.value);
+      pintarSelector();
+    });
+
+    entradaHex.addEventListener('change', () => {
+      const hex = normalizarHex(entradaHex.value);
+      if (hex) {
+        fijarDesdeHex(hex);
+      } else {
+        avisar('Código no válido. Ejemplo: #38B6F5');
+        entradaHex.value = hexActual;
+      }
+    });
+
+    entradaHex.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Enter') entradaHex.blur();
+    });
+
+    selectArmonia.addEventListener('change', pintarSelector);
+
+    selector.addEventListener('click', async (evento) => {
+      const formato = evento.target.closest('button[data-formato]');
+      if (formato) {
+        copiar(lecturas[formato.dataset.formato].textContent);
+        return;
+      }
+      const accion = evento.target.closest('button[data-accion]')?.dataset.accion;
+      if (accion === 'copiar') {
+        copiar(hexActual);
+      } else if (accion === 'azar') {
+        Object.assign(color, { h: Math.random() * 360, s: 40 + Math.random() * 50, v: 55 + Math.random() * 40 });
+        pintarSelector();
+      } else if (accion === 'gotero') {
+        try {
+          const { sRGBHex } = await new EyeDropper().open();
+          const hex = normalizarHex(sRGBHex);
+          if (hex) fijarDesdeHex(hex);
+        } catch {
+          // El usuario canceló el cuentagotas
+        }
+      } else if (accion === 'copiar-paleta') {
+        copiar(armonia(Math.round(color.h), selectArmonia.value).join(', '), 'Paleta copiada');
+      }
+    });
+
+    if ('EyeDropper' in window) selector.querySelector('[data-accion="gotero"]').hidden = false;
+
+    /* ---------- Paletas ---------- */
+    const seccionPaletas = document.querySelector('main > section:nth-of-type(3)');
+    const listaPaletas = seccionPaletas.querySelector('ul');
+    const MODOS = [
+      ['complementario', 'Complementario'],
+      ['analogo', 'Análogo'],
+      ['triadico', 'Triádico'],
+      ['monocromatico', 'Monocromático'],
+    ];
+
+    function paleta(modo, h) {
+      switch (modo) {
+        case 'complementario':
+          return [[0, 32], [0, 50], [0, 68], [180, 55], [180, 35]].map(([d, l]) => hslAHex(tono(h + d), 58, l));
+        case 'analogo':
+          return [-40, -20, 0, 20, 40].map((d) => hslAHex(tono(h + d), 55, 52));
+        case 'triadico':
+          return [[0, 48], [120, 46], [240, 44], [0, 66], [120, 64]].map(([d, l]) => hslAHex(tono(h + d), 55, l));
+        default:
+          return [22, 38, 54, 70, 86].map((l) => hslAHex(tono(h), 42, l));
+      }
+    }
+
+    function pintarPaletas(base) {
+      const fragmento = document.createDocumentFragment();
+      for (let i = 0; i < 16; i += 1) {
+        const [modo, nombre] = MODOS[i % MODOS.length];
+        const elemento = document.createElement('li');
+        const fila = document.createElement('p');
+        fila.append(...paleta(modo, tono(base + i * 37)).map((hex) => crearMuestra(hex)));
+        const etiqueta = document.createElement('small');
+        etiqueta.textContent = nombre;
+        elemento.append(fila, etiqueta);
+        fragmento.append(elemento);
+      }
+      listaPaletas.replaceChildren(fragmento);
+      listaPaletas.scrollLeft = 0;
+    }
+
+    seccionPaletas.querySelector('header menu').addEventListener('click', (evento) => {
+      const accion = evento.target.closest('button[data-accion]')?.dataset.accion;
+      const behavior = sinMovimiento.matches ? 'auto' : 'smooth';
+      if (accion === 'anterior') listaPaletas.scrollBy({ left: -listaPaletas.clientWidth, behavior });
+      else if (accion === 'siguiente') listaPaletas.scrollBy({ left: listaPaletas.clientWidth, behavior });
+      else if (accion === 'mezclar') pintarPaletas(Math.random() * 360);
+    });
+
+    // Arrastrar con el ratón (en táctil ya se desliza solo)
+    let arrastre = null;
+    let evitarClic = false;
+
+    listaPaletas.addEventListener('pointerdown', (evento) => {
+      if (evento.pointerType !== 'mouse' || evento.button !== 0) return;
+      arrastre = { x: evento.clientX, inicio: listaPaletas.scrollLeft, movido: false };
+    });
+
+    window.addEventListener('pointermove', (evento) => {
+      if (!arrastre) return;
+      const distancia = evento.clientX - arrastre.x;
+      if (!arrastre.movido && Math.abs(distancia) > 6) {
+        arrastre.movido = true;
+        listaPaletas.toggleAttribute('data-arrastrando', true);
+      }
+      if (arrastre.movido) listaPaletas.scrollLeft = arrastre.inicio - distancia;
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (arrastre?.movido) {
+        listaPaletas.removeAttribute('data-arrastrando');
+        evitarClic = true;
+        setTimeout(() => { evitarClic = false; }, 0);
+      }
+      arrastre = null;
+    });
+
+    listaPaletas.addEventListener('click', (evento) => {
+      if (!evitarClic) return;
+      evento.stopPropagation();
+      evento.preventDefault();
+    }, true);
+
+    /* ---------- Círculo cromático ---------- */
+    const seccionRueda = document.querySelector('main > section:nth-of-type(4) > article');
+    const rueda = seccionRueda.querySelector('section:first-of-type > span');
+    const [marcaBase, marcaUno, marcaDos] = rueda.children;
+    const ruedaMuestra = seccionRueda.querySelector('p > span');
+    const ruedaHex = seccionRueda.querySelector('p > strong');
+    const ruedaSelect = seccionRueda.querySelector('select');
+    const ruedaLista = seccionRueda.querySelector('ul');
+    const DESPLAZAMIENTOS = { complementario: [180], analogo: [-30, 30], triadico: [120, 240] };
+    let ruedaTono = 200;
+    let marcoRueda = 0;
+
+    function colocarMarca(marca, angulo) {
+      marca.hidden = angulo === undefined;
+      if (marca.hidden) return;
+      marca.style.setProperty('--a', `${tono(angulo)}deg`);
+      marca.style.setProperty('--c', hslAHex(tono(angulo), 60, 50));
+    }
+
+    function pintarRueda() {
+      cancelAnimationFrame(marcoRueda);
+      marcoRueda = requestAnimationFrame(() => {
+        const base = hslAHex(tono(ruedaTono), 60, 50);
+        const extras = (DESPLAZAMIENTOS[ruedaSelect.value] || []).map((d) => ruedaTono + d);
+        colocarMarca(marcaBase, ruedaTono);
+        colocarMarca(marcaUno, extras[0]);
+        colocarMarca(marcaDos, extras[1]);
+        ruedaMuestra.style.setProperty('--muestra', base);
+        ruedaHex.textContent = base;
+        rueda.setAttribute('aria-valuenow', Math.round(ruedaTono));
+        rueda.setAttribute('aria-valuetext', `${Math.round(ruedaTono)} grados, ${base}`);
+        pintarMuestras(ruedaLista, armonia(Math.round(ruedaTono), ruedaSelect.value));
+      });
+    }
+
+    function anguloDesde(evento) {
+      const zona = rueda.getBoundingClientRect();
+      const dx = evento.clientX - (zona.left + zona.width / 2);
+      const dy = evento.clientY - (zona.top + zona.height / 2);
+      return tono((Math.atan2(dx, -dy) * 180) / Math.PI);
+    }
+
+    rueda.addEventListener('pointerdown', (evento) => {
+      rueda.setPointerCapture(evento.pointerId);
+      ruedaTono = anguloDesde(evento);
+      pintarRueda();
+    });
+
+    rueda.addEventListener('pointermove', (evento) => {
+      if (!rueda.hasPointerCapture(evento.pointerId)) return;
+      ruedaTono = anguloDesde(evento);
+      pintarRueda();
+    });
+
+    rueda.addEventListener('keydown', (evento) => {
+      const paso = evento.shiftKey ? 15 : 1;
+      if (evento.key === 'ArrowRight' || evento.key === 'ArrowUp') ruedaTono = tono(ruedaTono + paso);
+      else if (evento.key === 'ArrowLeft' || evento.key === 'ArrowDown') ruedaTono = tono(ruedaTono - paso);
+      else return;
+      evento.preventDefault();
+      pintarRueda();
+    });
+
+    ruedaSelect.addEventListener('change', pintarRueda);
+
+    /* ---------- Inicio ---------- */
+    fijarDesdeHex('#38B6F5');
+    pintarPaletas(200);
+    pintarRueda();
+  </script>
+</body>
+</html>

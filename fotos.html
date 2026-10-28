@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFT Monalisa · Fotos</title>
+  <meta name="description" content="Redimensiona, quita el fondo o colorea tus fotos en el navegador.">
+  <meta name="theme-color" content="#38b6f5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2338b6f5'/%3E%3Cpath d='M9 22V10l7 8 7-8v12' fill='none' stroke='%230f1b2a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap" rel="stylesheet">
+
+  <style>
+    a {
+      text-decoration: none;
+      color: var(--cielo-oscuro);
+    }
+
+    /* ---------- Variables ---------- */
+    :root {
+      --fondo: #ffffff;
+      --suave: #f3f7fa;
+      --tinta: #0f1b2a;
+      --gris: #5b6b7b;
+      --linea: #e1e8ef;
+      --cielo: #38b6f5;
+      --cielo-hover: #1ea6ec;
+      --cielo-oscuro: #0a76b2;
+      --cielo-claro: #e4f5fe;
+      --radio: 18px;
+      --radio-control: 10px;
+      --sombra: 0 1px 2px rgba(15, 27, 42, 0.04), 0 16px 40px -24px rgba(15, 27, 42, 0.22);
+      --fuente: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fuente-codigo: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --i-color: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7H16a5 5 0 0 0 5-5c0-4.1-4-7.2-9-7.2z'/%3E%3Ccircle cx='7.5' cy='11.5' r='1'/%3E%3Ccircle cx='10.5' cy='7.5' r='1'/%3E%3Ccircle cx='15.5' cy='8.5' r='1'/%3E%3C/svg%3E");
+      --i-texto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h10'/%3E%3C/svg%3E");
+      --i-fotos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='2'/%3E%3Cpath d='m21 16-5-5-9 9'/%3E%3C/svg%3E");
+      --i-descargar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 20h14'/%3E%3C/svg%3E");
+      --i-subir: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 16V4'/%3E%3Cpath d='m7 9 5-5 5 5'/%3E%3Cpath d='M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2'/%3E%3C/svg%3E");
+      --i-candado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='10' rx='2'/%3E%3Cpath d='M8 11V8a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E");
+      --i-candado-abierto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='10' rx='2'/%3E%3Cpath d='M8 11V8a4 4 0 0 1 7.75-1.4'/%3E%3C/svg%3E");
+      --i-deshacer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14 4 9l5-5'/%3E%3Cpath d='M4 9h10.5a5.5 5.5 0 0 1 0 11H11'/%3E%3C/svg%3E");
+      color-scheme: light;
+    }
+
+    /* ---------- Base ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--fuente);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    figure,
+    ul,
+    ol,
+    menu,
+    fieldset {
+      margin: 0;
+    }
+
+    ul,
+    ol,
+    menu {
+      padding: 0;
+      list-style: none;
+    }
+
+    fieldset {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      padding: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    select,
+    output,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: var(--cielo);
+      color: var(--tinta);
+    }
+
+    /* ---------- Iconos ---------- */
+    [data-icono]::before {
+      content: "";
+      flex: none;
+      width: 18px;
+      height: 18px;
+      background: currentColor;
+      -webkit-mask: var(--icono) center / contain no-repeat;
+      mask: var(--icono) center / contain no-repeat;
+    }
+
+    [data-icono="color"] {
+      --icono: var(--i-color);
+    }
+
+    [data-icono="texto"] {
+      --icono: var(--i-texto);
+    }
+
+    [data-icono="fotos"] {
+      --icono: var(--i-fotos);
+    }
+
+    [data-icono="descargar"] {
+      --icono: var(--i-descargar);
+    }
+
+    [data-icono="subir"] {
+      --icono: var(--i-subir);
+    }
+
+    [data-icono="candado"] {
+      --icono: var(--i-candado);
+    }
+
+    [data-icono="candado-abierto"] {
+      --icono: var(--i-candado-abierto);
+    }
+
+    [data-icono="deshacer"] {
+      --icono: var(--i-deshacer);
+    }
+
+    /* ---------- Cabecera: tres botones para moverse ---------- */
+    body > header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--linea);
+      background: rgba(255, 255, 255, 0.88);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    body > header nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    body > header nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    body > header nav a:hover:not([aria-current="page"]) {
+      border-color: var(--cielo);
+      box-shadow: 0 8px 18px -10px rgba(56, 182, 245, 0.7);
+      transform: translateY(-1px);
+    }
+
+    body > header nav a[aria-current="page"] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    /* ---------- Contenido ---------- */
+    main {
+      flex: 1;
+      width: min(1120px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    main > section {
+      padding-block: clamp(28px, 5vw, 56px);
+    }
+
+    main article {
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      background: var(--fondo);
+      box-shadow: var(--sombra);
+    }
+
+    /* Botones */
+    main button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s;
+    }
+
+    main button:hover:not(:disabled) {
+      border-color: var(--cielo);
+    }
+
+    main button:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    main button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    main button[aria-pressed="true"],
+    main button[data-principal] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main button[data-principal]:hover:not(:disabled) {
+      border-color: var(--cielo-hover);
+      background: var(--cielo-hover);
+    }
+
+    /* Opciones tipo píldora (radios) */
+    main label:has(> input[type="radio"]) {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      color: var(--tinta);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    main label:has(> input[type="radio"]):hover {
+      border-color: var(--cielo);
+    }
+
+    main label > input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    main label:has(> input[type="radio"]:checked) {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main label:has(> input[type="radio"]:focus-visible) {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    main label:has(> input[type="radio"]:disabled) {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Campos */
+    main input[type="number"],
+    main input[type="text"],
+    main select {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    main input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    main input[type="number"]::-webkit-outer-spin-button,
+    main input[type="number"]::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+
+    main input:hover,
+    main select:hover {
+      border-color: #c9d6e2;
+    }
+
+    main input:focus-visible,
+    main select:focus-visible {
+      outline: none;
+      border-color: var(--cielo);
+      box-shadow: 0 0 0 3px rgba(56, 182, 245, 0.25);
+    }
+
+    main input[type="range"] {
+      width: 100%;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    main label:has(> input[type="checkbox"]) {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--tinta);
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    main input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    /* ---------- Pie ---------- */
+    body > footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px 20px;
+      width: min(1120px, 100% - 32px);
+      margin: 40px auto 0;
+      padding-block: 22px 28px;
+      border-top: 1px solid var(--linea);
+      color: var(--gris);
+      font-size: 0.875rem;
+    }
+
+    body > footer strong {
+      color: var(--tinta);
+      font-weight: 600;
+    }
+
+    /* ---------- Aviso ---------- */
+    body > output {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      z-index: 30;
+      max-width: min(92vw, 440px);
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--tinta);
+      color: #ffffff;
+      font-size: 0.9rem;
+      box-shadow: 0 14px 32px -14px rgba(15, 27, 42, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 16px);
+      transition: opacity 0.2s, transform 0.25s;
+    }
+
+    body > output[data-visible] {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Área temporal para copiar en navegadores antiguos */
+    body > textarea {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    @media (max-width: 520px) {
+      body > header {
+        padding-inline: 10px;
+      }
+
+      body > header nav {
+        gap: 6px;
+      }
+
+      body > header nav a {
+        gap: 6px;
+        padding: 9px 14px;
+        font-size: 0.9rem;
+      }
+
+      body > header nav a[data-icono]::before {
+        width: 16px;
+        height: 16px;
+      }
+
+      body > footer {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+      }
+    }
+
+    main > section > header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px 20px;
+      margin-bottom: 20px;
+    }
+
+    main > section > header h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    /* Selector de herramienta */
+    main > section > header menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      background: var(--suave);
+    }
+
+    main > section > header menu button {
+      min-height: 38px;
+      border-color: transparent;
+      background: transparent;
+    }
+
+    main > section > header menu button[aria-pressed="true"] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+    }
+
+    /* ---------- Mesa de trabajo ---------- */
+    main article {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 24px;
+      padding: clamp(14px, 2.5vw, 24px);
+    }
+
+    main[data-estado="vacio"] article {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    main[data-estado="vacio"] article > figure,
+    main[data-estado="vacio"] article > form,
+    main[data-estado="cargada"] article > label {
+      display: none;
+    }
+
+    article > input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Zona para subir */
+    article > label {
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      gap: 16px;
+      min-height: clamp(300px, 50vh, 460px);
+      padding: 32px 20px;
+      border: 2px dashed #c9d6e2;
+      border-radius: 14px;
+      background: var(--suave);
+      color: var(--cielo-oscuro);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    article > label[data-icono]::before {
+      width: 44px;
+      height: 44px;
+    }
+
+    article > label strong {
+      color: var(--tinta);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    article > label b {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 22px;
+      border-radius: var(--radio-control);
+      background: var(--cielo);
+      color: var(--tinta);
+      font-weight: 600;
+    }
+
+    article > label:hover,
+    main[data-arrastrando] article > label {
+      border-color: var(--cielo);
+      background: var(--cielo-claro);
+    }
+
+    article > input:focus-visible + label {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 3px;
+    }
+
+    /* Vista previa con cuadros para la transparencia */
+    article > figure {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 340px;
+      padding: 16px;
+      overflow: hidden;
+      border-radius: 14px;
+      background-color: #f6f8fa;
+      background-image: conic-gradient(#e7edf2 25%, transparent 0 50%, #e7edf2 0 75%, transparent 0);
+      background-size: 20px 20px;
+    }
+
+    article > figure canvas {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(62vh, 560px);
+      border-radius: 4px;
+      box-shadow: 0 10px 30px -18px rgba(15, 27, 42, 0.5);
+    }
+
+    main[data-herramienta="fondo"] article > figure canvas {
+      cursor: crosshair;
+    }
+
+    article > figure figcaption {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 1px 3px rgba(15, 27, 42, 0.12);
+      font-size: 0.8rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ---------- Ajustes ---------- */
+    article > form {
+      display: grid;
+      align-content: start;
+      gap: 22px;
+    }
+
+    article > form fieldset {
+      display: grid;
+      gap: 8px;
+    }
+
+    article > form legend {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    article > form label {
+      color: var(--gris);
+      font-size: 0.85rem;
+    }
+
+    article > form output {
+      color: var(--tinta);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    article > form label:has(> input[type="number"]) {
+      display: grid;
+      gap: 6px;
+    }
+
+    article > form label:has(> input[type="range"]) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+    }
+
+    article > form label > input[type="range"] {
+      grid-column: 1 / -1;
+    }
+
+    /* Tamaño */
+    article > form fieldset:first-of-type {
+      grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+      align-items: end;
+    }
+
+    article > form fieldset:first-of-type > button {
+      width: 42px;
+      padding: 0;
+    }
+
+    article > form fieldset:first-of-type > button[aria-pressed="true"] {
+      --icono: var(--i-candado);
+    }
+
+    article > form fieldset:first-of-type menu,
+    article > form fieldset:first-of-type > label:has(> input[type="checkbox"]) {
+      grid-column: 1 / -1;
+    }
+
+    article > form fieldset:first-of-type menu {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    article > form fieldset:first-of-type menu button {
+      width: 100%;
+      min-height: 38px;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    /* Quitar fondo */
+    article > form fieldset:nth-of-type(2) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 42px;
+      align-items: center;
+    }
+
+    article > form fieldset:nth-of-type(2) > p,
+    article > form fieldset:nth-of-type(2) > label:has(> input[type="range"]),
+    article > form fieldset:nth-of-type(2) > button {
+      grid-column: 1 / -1;
+    }
+
+    article > form fieldset:nth-of-type(2) > p {
+      color: var(--gris);
+      font-size: 0.9rem;
+    }
+
+    article > form input[type="color"] {
+      width: 42px;
+      height: 40px;
+      padding: 3px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      cursor: pointer;
+    }
+
+    /* Colorear */
+    article > form fieldset:nth-of-type(3) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    article > form fieldset:nth-of-type(3) > label:has(> input[type="range"]) {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+    }
+
+    /* Formato */
+    article > form fieldset:last-of-type {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    article > form > button {
+      width: 100%;
+    }
+
+    article > form > button[type="submit"] {
+      min-height: 50px;
+      font-size: 1rem;
+    }
+
+    article > form > button[name="otra"] {
+      margin-top: -12px;
+    }
+
+    @media (max-width: 860px) {
+      main article {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      article > figure {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      main > section > header menu {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      main > section > header menu button {
+        width: 100%;
+        padding: 0 4px;
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Herramientas">
+      <a href="index.html" data-icono="color">Color</a>
+      <a href="texto.html" data-icono="texto">Texto</a>
+      <a href="fotos.html" data-icono="fotos" aria-current="page">Fotos</a>
+    </nav>
+  </header>
+
+  <main data-estado="vacio" data-herramienta="redimensionar">
+    <section aria-labelledby="titulo">
+      <header>
+        <h1 id="titulo">Fotos</h1>
+        <menu aria-label="Herramienta">
+          <li><button type="button" data-herramienta="redimensionar" aria-pressed="true">Redimensionar</button></li>
+          <li><button type="button" data-herramienta="fondo" aria-pressed="false">Quitar fondo</button></li>
+          <li><button type="button" data-herramienta="colorear" aria-pressed="false">Colorear</button></li>
+        </menu>
+      </header>
+
+      <article>
+        <input type="file" id="archivo" accept="image/*">
+        <label for="archivo" data-icono="subir">
+          <strong>Arrastra o pega una foto</strong>
+          <b>Elegir foto</b>
+        </label>
+
+        <figure>
+          <canvas aria-label="Vista previa"></canvas>
+          <figcaption></figcaption>
+        </figure>
+
+        <form aria-label="Ajustes de la foto">
+          <fieldset data-herramienta="redimensionar">
+            <legend>Tamaño</legend>
+            <label>Ancho<input type="number" name="ancho" min="1" max="10000" inputmode="numeric"></label>
+            <button type="button" name="candado" data-icono="candado-abierto" aria-pressed="true" aria-label="Mantener proporción"></button>
+            <label>Alto<input type="number" name="alto" min="1" max="10000" inputmode="numeric"></label>
+            <menu aria-label="Escala">
+              <li><button type="button" name="escala" value="25">25 %</button></li>
+              <li><button type="button" name="escala" value="50">50 %</button></li>
+              <li><button type="button" name="escala" value="75">75 %</button></li>
+              <li><button type="button" name="escala" value="100">100 %</button></li>
+            </menu>
+            <label><input type="checkbox" name="noAgrandar">No agrandar</label>
+          </fieldset>
+
+          <fieldset data-herramienta="fondo" hidden>
+            <legend>Quitar fondo</legend>
+            <p>Toca el fondo en la foto.</p>
+            <label>Tolerancia <output name="toleranciaTexto">32</output><input type="range" name="tolerancia" min="2" max="100" value="32"></label>
+            <label><input type="radio" name="relleno" value="transparente" checked>Transparente</label>
+            <label><input type="radio" name="relleno" value="color">Color</label>
+            <input type="color" name="colorFondo" value="#ffffff" aria-label="Color del fondo nuevo">
+            <button type="button" name="deshacer" data-icono="deshacer" disabled>Deshacer</button>
+          </fieldset>
+
+          <fieldset data-herramienta="colorear" hidden>
+            <legend>Tono</legend>
+            <label><input type="radio" name="preset" value="sepia" checked>Sepia</label>
+            <label><input type="radio" name="preset" value="retrato">Retrato</label>
+            <label><input type="radio" name="preset" value="paisaje">Paisaje</label>
+            <label><input type="radio" name="preset" value="urbano">Frío</label>
+            <label>Intensidad <output name="intensidadTexto">70 %</output><input type="range" name="intensidad" min="0" max="100" value="70"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Formato</legend>
+            <label><input type="radio" name="formato" value="image/png" checked>PNG</label>
+            <label><input type="radio" name="formato" value="image/jpeg">JPG</label>
+            <label><input type="radio" name="formato" value="image/webp">WEBP</label>
+          </fieldset>
+
+          <button type="submit" data-icono="descargar" data-principal>Descargar</button>
+          <button type="button" name="otra" data-icono="subir">Otra foto</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <strong>CFT Monalisa</strong>
+    <p>Personalizado por Samir®</p>
+    <small>© 2026</small>
+  </footer>
+
+  <output id="aviso" role="status" aria-live="polite"></output>
+
+  <script>
+    'use strict';
+
+    /* ---------- Utilidades comunes ---------- */
+    const aviso = document.getElementById('aviso');
+    let temporizadorAviso;
+
+    function avisar(mensaje) {
+      aviso.value = mensaje;
+      aviso.toggleAttribute('data-visible', true);
+      clearTimeout(temporizadorAviso);
+      temporizadorAviso = setTimeout(() => aviso.removeAttribute('data-visible'), 2400);
+    }
+
+    async function copiar(texto, mensaje = `Copiado: ${texto}`) {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Sin portapapeles');
+        await navigator.clipboard.writeText(texto);
+      } catch {
+        // Método clásico para navegadores sin portapapeles moderno
+        const enfocado = document.activeElement;
+        const area = document.createElement('textarea');
+        area.value = texto;
+        area.readOnly = true;
+        document.body.append(area);
+        area.select();
+        const copiado = document.execCommand('copy');
+        area.remove();
+        if (enfocado instanceof HTMLElement) enfocado.focus({ preventScroll: true });
+        if (!copiado) {
+          avisar('No se pudo copiar. Selecciónalo y pulsa Ctrl + C.');
+          return false;
+        }
+      }
+      avisar(mensaje);
+      return true;
+    }
+
+    function descargar(blob, nombre) {
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement('a');
+      enlace.href = url;
+      enlace.download = nombre;
+      document.body.append(enlace);
+      enlace.click();
+      enlace.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    function limitar(valor, minimo, maximo) {
+      return Math.min(Math.max(valor, minimo), maximo);
+    }
+
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    /* ---------- Configuración ---------- */
+    const MAX_TRABAJO = 2400;      // lado máximo para quitar fondo y colorear
+    const MAX_VISTA = 1400;        // lado máximo de la vista previa al redimensionar
+    const LIMITE_LADO = 10000;
+    const LIMITE_AREA = 50000000;
+    const HERRAMIENTAS = ['redimensionar', 'fondo', 'colorear'];
+    const EXTENSIONES = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' };
+    const PRESETS = {
+      sepia: { sombra: [40, 24, 14], medio: [152, 110, 72], luz: [236, 214, 180] },
+      retrato: { sombra: [58, 28, 30], medio: [196, 132, 104], luz: [247, 222, 196] },
+      paisaje: { sombra: [20, 38, 28], medio: [104, 132, 74], luz: [229, 224, 178] },
+      urbano: { sombra: [24, 30, 40], medio: [92, 112, 132], luz: [210, 220, 228] },
+    };
+    const numero = new Intl.NumberFormat('es-ES');
+
+    /* ---------- Elementos ---------- */
+    const principal = document.querySelector('main');
+    const entrada = document.getElementById('archivo');
+    const lienzo = document.querySelector('main figure canvas');
+    const contexto = lienzo.getContext('2d');
+    const pie = document.querySelector('main figure figcaption');
+    const formulario = document.querySelector('main form');
+    const campos = formulario.elements;
+    const botonesHerramienta = document.querySelectorAll('button[data-herramienta]');
+    const grupos = formulario.querySelectorAll('fieldset[data-herramienta]');
+
+    /* ---------- Estado ---------- */
+    const estado = {
+      herramienta: 'redimensionar',
+      imagen: null,
+      url: null,
+      nombre: 'foto',
+      anchoOriginal: 0,
+      altoOriginal: 0,
+      ancho: 0,
+      alto: 0,
+      bloqueado: true,
+      trabajo: null,       // copia reducida de la foto: { ancho, alto, lienzo, datos }
+      clics: [],
+      alfa: null,
+      alfaPendiente: true,
+      memoria: null,       // búferes reutilizables para el relleno
+      salida: null,
+    };
+
+    /* ---------- Utilidades ---------- */
+    function nombreBase(nombre) {
+      const limpio = nombre.replace(/\.[^.]+$/, '').replace(/[^\p{L}\p{N}_-]+/gu, '-').replace(/^-+|-+$/g, '');
+      return limpio || 'foto';
+    }
+
+    function hexARgb(hex) {
+      const valor = parseInt(hex.slice(1), 16);
+      return [(valor >> 16) & 255, (valor >> 8) & 255, valor & 255];
+    }
+
+    function dibujar(origen, ancho, alto, relleno = null) {
+      const nuevo = document.createElement('canvas');
+      nuevo.width = ancho;
+      nuevo.height = alto;
+      const ctx = nuevo.getContext('2d');
+      if (relleno) {
+        ctx.fillStyle = relleno;
+        ctx.fillRect(0, 0, ancho, alto);
+      }
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(origen, 0, 0, ancho, alto);
+      return nuevo;
+    }
+
+    // Al reducir mucho se encoge por mitades para que el resultado quede nítido
+    function escalar(origen, anchoOrigen, altoOrigen, ancho, alto, relleno = null) {
+      let fuente = origen;
+      let w = anchoOrigen;
+      let h = altoOrigen;
+      while (w > ancho * 2 || h > alto * 2) {
+        w = Math.max(ancho, Math.round(w / 2));
+        h = Math.max(alto, Math.round(h / 2));
+        fuente = dibujar(fuente, w, h);
+      }
+      return dibujar(fuente, ancho, alto, relleno);
+    }
+
+    function admite(tipo) {
+      const prueba = document.createElement('canvas');
+      prueba.width = 1;
+      prueba.height = 1;
+      return prueba.toDataURL(tipo).startsWith(`data:${tipo}`);
+    }
+
+    /* ---------- Carga ---------- */
+    async function cargar(archivo) {
+      if (!archivo) return;
+      if (archivo.type && !archivo.type.startsWith('image/')) {
+        avisar('Ese archivo no es una imagen.');
+        return;
+      }
+      const url = URL.createObjectURL(archivo);
+      const imagen = new Image();
+      imagen.src = url;
+      try {
+        await imagen.decode();
+      } catch {
+        URL.revokeObjectURL(url);
+        avisar('No se pudo abrir la imagen.');
+        return;
+      }
+
+      if (estado.url) URL.revokeObjectURL(estado.url);
+      Object.assign(estado, {
+        imagen,
+        url,
+        nombre: nombreBase(archivo.name || 'foto'),
+        anchoOriginal: imagen.naturalWidth,
+        altoOriginal: imagen.naturalHeight,
+        ancho: imagen.naturalWidth,
+        alto: imagen.naturalHeight,
+        bloqueado: true,
+        clics: [],
+        alfaPendiente: true,
+      });
+      prepararTrabajo();
+      campos.deshacer.disabled = true;
+      principal.dataset.estado = 'cargada';
+      pintarCampos();
+      pintar();
+    }
+
+    // Una copia reducida sirve para la vista previa, quitar el fondo y colorear
+    function prepararTrabajo() {
+      const escala = Math.min(1, MAX_TRABAJO / Math.max(estado.anchoOriginal, estado.altoOriginal));
+      const ancho = Math.max(1, Math.round(estado.anchoOriginal * escala));
+      const alto = Math.max(1, Math.round(estado.altoOriginal * escala));
+      const copia = escalar(estado.imagen, estado.anchoOriginal, estado.altoOriginal, ancho, alto);
+      const total = ancho * alto;
+      estado.trabajo = { ancho, alto, lienzo: copia, datos: copia.getContext('2d').getImageData(0, 0, ancho, alto) };
+      estado.alfa = new Uint8ClampedArray(total).fill(255);
+      estado.memoria = { visto: new Uint8Array(total), cola: new Int32Array(total) };
+      estado.salida = new ImageData(ancho, alto);
+    }
+
+    /* ---------- Quitar fondo ---------- */
+    // Relleno por inundación con cola fija: rápido y sin desbordar la pila.
+    // Los píxeles del borde reciben transparencia parcial para suavizar el recorte.
+    function rellenar(px, ancho, alto, x0, y0, tolerancia, alfa, visto, cola) {
+      visto.fill(0);
+      const total = ancho * alto;
+      const inicio = y0 * ancho + x0;
+      const r0 = px[inicio * 4];
+      const g0 = px[inicio * 4 + 1];
+      const b0 = px[inicio * 4 + 2];
+      const limite = tolerancia * 4.41;
+      const borde = limite * 1.35;
+      const limite2 = limite * limite;
+      const borde2 = borde * borde;
+      const rango = borde - limite;
+      let cabeza = 0;
+      let fin = 0;
+      cola[fin++] = inicio;
+      visto[inicio] = 1;
+
+      while (cabeza < fin) {
+        const i = cola[cabeza++];
+        const p = i * 4;
+        const dr = px[p] - r0;
+        const dg = px[p + 1] - g0;
+        const db = px[p + 2] - b0;
+        const d2 = dr * dr + dg * dg + db * db;
+        if (d2 > limite2) {
+          if (d2 < borde2) {
+            const a = ((Math.sqrt(d2) - limite) / rango) * 255;
+            if (a < alfa[i]) alfa[i] = a;
+          }
+          continue;
+        }
+        alfa[i] = 0;
+        const x = i % ancho;
+        if (x > 0 && !visto[i - 1]) { visto[i - 1] = 1; cola[fin++] = i - 1; }
+        if (x < ancho - 1 && !visto[i + 1]) { visto[i + 1] = 1; cola[fin++] = i + 1; }
+        if (i >= ancho && !visto[i - ancho]) { visto[i - ancho] = 1; cola[fin++] = i - ancho; }
+        if (i < total - ancho && !visto[i + ancho]) { visto[i + ancho] = 1; cola[fin++] = i + ancho; }
+      }
+    }
+
+    function recalcularAlfa() {
+      const { trabajo, alfa, memoria } = estado;
+      alfa.fill(255);
+      const tolerancia = Number(campos.tolerancia.value);
+      for (const [x, y] of estado.clics) {
+        rellenar(trabajo.datos.data, trabajo.ancho, trabajo.alto, x, y, tolerancia, alfa, memoria.visto, memoria.cola);
+      }
+      estado.alfaPendiente = false;
+    }
+
+    function componerFondo(destino) {
+      const fuente = estado.trabajo.datos.data;
+      const salida = destino.data;
+      const alfa = estado.alfa;
+      if (campos.relleno.value === 'color') {
+        const [cr, cg, cb] = hexARgb(campos.colorFondo.value);
+        for (let i = 0, p = 0; i < alfa.length; i += 1, p += 4) {
+          const t = (alfa[i] * fuente[p + 3]) / 65025;
+          const u = 1 - t;
+          salida[p] = fuente[p] * t + cr * u;
+          salida[p + 1] = fuente[p + 1] * t + cg * u;
+          salida[p + 2] = fuente[p + 2] * t + cb * u;
+          salida[p + 3] = 255;
+        }
+      } else {
+        salida.set(fuente);
+        for (let i = 0, p = 3; i < alfa.length; i += 1, p += 4) {
+          if (alfa[i] < salida[p]) salida[p] = alfa[i];
+        }
+      }
+    }
+
+    /* ---------- Colorear ---------- */
+    let tablaGuardada = { preset: '', tabla: null };
+
+    // Tabla precalculada de 256 tonos: evita repetir la mezcla en cada píxel
+    function tablaTonos(nombre) {
+      if (tablaGuardada.preset === nombre) return tablaGuardada.tabla;
+      const { sombra, medio, luz } = PRESETS[nombre];
+      const tabla = new Float32Array(256 * 3);
+      for (let l = 0; l < 256; l += 1) {
+        const t = l / 255;
+        const [a, b, k] = t < 0.5 ? [sombra, medio, t / 0.5] : [medio, luz, (t - 0.5) / 0.5];
+        for (let c = 0; c < 3; c += 1) tabla[l * 3 + c] = a[c] + (b[c] - a[c]) * k;
+      }
+      tablaGuardada = { preset: nombre, tabla };
+      return tabla;
+    }
+
+    function componerColor(destino) {
+      const fuente = estado.trabajo.datos.data;
+      const salida = destino.data;
+      const tabla = tablaTonos(campos.preset.value);
+      const mezcla = Number(campos.intensidad.value) / 100;
+      for (let p = 0; p < fuente.length; p += 4) {
+        const r = fuente[p];
+        const g = fuente[p + 1];
+        const b = fuente[p + 2];
+        const l = ((r * 77 + g * 150 + b * 29) >> 8) * 3;
+        salida[p] = r + (tabla[l] - r) * mezcla;
+        salida[p + 1] = g + (tabla[l + 1] - g) * mezcla;
+        salida[p + 2] = b + (tabla[l + 2] - b) * mezcla;
+        salida[p + 3] = fuente[p + 3];
+      }
+    }
+
+    /* ---------- Pintado ---------- */
+    let marco = 0;
+
+    function pintar() {
+      cancelAnimationFrame(marco);
+      marco = requestAnimationFrame(pintarAhora);
+    }
+
+    function ajustarLienzo(ancho, alto) {
+      if (lienzo.width !== ancho || lienzo.height !== alto) {
+        lienzo.width = ancho;
+        lienzo.height = alto;
+      }
+    }
+
+    function pintarAhora() {
+      if (!estado.imagen) return;
+      const { trabajo } = estado;
+      if (estado.herramienta === 'redimensionar') {
+        const escala = Math.min(1, MAX_VISTA / Math.max(estado.ancho, estado.alto));
+        const ancho = Math.max(1, Math.round(estado.ancho * escala));
+        const alto = Math.max(1, Math.round(estado.alto * escala));
+        ajustarLienzo(ancho, alto);
+        contexto.clearRect(0, 0, ancho, alto);
+        contexto.imageSmoothingQuality = 'high';
+        contexto.drawImage(trabajo.lienzo, 0, 0, ancho, alto);
+        pie.textContent = `${numero.format(estado.ancho)} × ${numero.format(estado.alto)} px`;
+      } else {
+        ajustarLienzo(trabajo.ancho, trabajo.alto);
+        if (estado.herramienta === 'fondo') {
+          if (estado.alfaPendiente) recalcularAlfa();
+          componerFondo(estado.salida);
+        } else {
+          componerColor(estado.salida);
+        }
+        contexto.putImageData(estado.salida, 0, 0);
+        pie.textContent = `${numero.format(trabajo.ancho)} × ${numero.format(trabajo.alto)} px`;
+      }
+    }
+
+    function pintarCampos(origen = null) {
+      if (origen !== 'ancho') campos.ancho.value = estado.ancho;
+      if (origen !== 'alto') campos.alto.value = estado.alto;
+      campos.candado.setAttribute('aria-pressed', String(estado.bloqueado));
+      for (const boton of campos.escala) {
+        const parte = Number(boton.value) / 100;
+        const activo = Math.round(estado.anchoOriginal * parte) === estado.ancho
+          && Math.round(estado.altoOriginal * parte) === estado.alto;
+        boton.setAttribute('aria-pressed', String(activo));
+      }
+    }
+
+    /* ---------- Redimensionar ---------- */
+    function fijarTamano(ancho, alto, origen = null) {
+      let w = Math.max(1, Math.round(ancho));
+      let h = Math.max(1, Math.round(alto));
+      if (campos.noAgrandar.checked && (w > estado.anchoOriginal || h > estado.altoOriginal)) {
+        const factor = Math.min(estado.anchoOriginal / w, estado.altoOriginal / h);
+        w = Math.max(1, Math.round(w * factor));
+        h = Math.max(1, Math.round(h * factor));
+        origen = null;
+      }
+      const factor = Math.min(1, LIMITE_LADO / w, LIMITE_LADO / h, Math.sqrt(LIMITE_AREA / (w * h)));
+      if (factor < 1) {
+        w = Math.floor(w * factor);
+        h = Math.floor(h * factor);
+        origen = null;
+        avisar(`Demasiado grande: se ajustó a ${numero.format(w)} × ${numero.format(h)} px.`);
+      }
+      estado.ancho = w;
+      estado.alto = h;
+      pintarCampos(origen);
+      pintar();
+    }
+
+    const proporcion = () => estado.altoOriginal / estado.anchoOriginal;
+
+    campos.ancho.addEventListener('input', () => {
+      const ancho = Number(campos.ancho.value);
+      if (!(ancho >= 1)) return;
+      fijarTamano(ancho, estado.bloqueado ? ancho * proporcion() : estado.alto, 'ancho');
+    });
+
+    campos.alto.addEventListener('input', () => {
+      const alto = Number(campos.alto.value);
+      if (!(alto >= 1)) return;
+      fijarTamano(estado.bloqueado ? alto / proporcion() : estado.ancho, alto, 'alto');
+    });
+
+    campos.candado.addEventListener('click', () => {
+      estado.bloqueado = !estado.bloqueado;
+      if (estado.bloqueado) fijarTamano(estado.ancho, estado.ancho * proporcion());
+      else pintarCampos();
+    });
+
+    campos.noAgrandar.addEventListener('change', () => fijarTamano(estado.ancho, estado.alto));
+
+    /* ---------- Eventos del formulario ---------- */
+    formulario.addEventListener('click', (evento) => {
+      const escala = evento.target.closest('button[name="escala"]');
+      if (!escala) return;
+      const parte = Number(escala.value) / 100;
+      estado.bloqueado = true;
+      fijarTamano(estado.anchoOriginal * parte, estado.altoOriginal * parte);
+    });
+
+    formulario.addEventListener('change', (evento) => {
+      const { name, type } = evento.target;
+      if (type === 'number') pintarCampos();
+      else if (['relleno', 'preset', 'colorFondo'].includes(name)) pintar();
+    });
+
+    formulario.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Enter' && evento.target.type === 'number') {
+        evento.preventDefault();
+        pintarCampos();
+      }
+    });
+
+    campos.tolerancia.addEventListener('input', () => {
+      campos.toleranciaTexto.value = campos.tolerancia.value;
+      estado.alfaPendiente = true;
+      pintar();
+    });
+
+    campos.colorFondo.addEventListener('input', () => {
+      campos.relleno.value = 'color';
+      pintar();
+    });
+
+    campos.intensidad.addEventListener('input', () => {
+      campos.intensidadTexto.value = `${campos.intensidad.value} %`;
+      pintar();
+    });
+
+    campos.deshacer.addEventListener('click', () => {
+      estado.clics.pop();
+      estado.alfaPendiente = true;
+      campos.deshacer.disabled = estado.clics.length === 0;
+      pintar();
+    });
+
+    lienzo.addEventListener('click', (evento) => {
+      if (estado.herramienta !== 'fondo' || !estado.trabajo) return;
+      const zona = lienzo.getBoundingClientRect();
+      const x = limitar(Math.floor(((evento.clientX - zona.left) * lienzo.width) / zona.width), 0, lienzo.width - 1);
+      const y = limitar(Math.floor(((evento.clientY - zona.top) * lienzo.height) / zona.height), 0, lienzo.height - 1);
+      estado.clics.push([x, y]);
+      estado.alfaPendiente = true;
+      campos.deshacer.disabled = false;
+      pintar();
+    });
+
+    /* ---------- Descargar ---------- */
+    formulario.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      if (!estado.imagen) return;
+      const tipo = campos.formato.value;
+      const blanco = tipo === 'image/jpeg' ? '#ffffff' : null;
+      let final;
+      if (estado.herramienta === 'redimensionar') {
+        final = escalar(estado.imagen, estado.anchoOriginal, estado.altoOriginal, estado.ancho, estado.alto, blanco);
+      } else {
+        pintarAhora();
+        final = blanco ? dibujar(lienzo, lienzo.width, lienzo.height, blanco) : lienzo;
+      }
+      const blob = await new Promise((resolver) => final.toBlob(resolver, tipo, 0.92));
+      if (!blob) {
+        avisar('No se pudo crear la imagen.');
+        return;
+      }
+      const sufijo = { redimensionar: `${estado.ancho}x${estado.alto}`, fondo: 'sin-fondo', colorear: 'color' }[estado.herramienta];
+      const nombre = `${estado.nombre}-${sufijo}.${EXTENSIONES[blob.type] || 'png'}`;
+      descargar(blob, nombre);
+      avisar(`Descargada: ${nombre}`);
+    });
+
+    /* ---------- Herramientas ---------- */
+    function elegirHerramienta(nombre, cambiarUrl = true) {
+      if (!HERRAMIENTAS.includes(nombre)) return;
+      estado.herramienta = nombre;
+      principal.dataset.herramienta = nombre;
+      for (const boton of botonesHerramienta) boton.setAttribute('aria-pressed', String(boton.dataset.herramienta === nombre));
+      for (const grupo of grupos) grupo.hidden = grupo.dataset.herramienta !== nombre;
+      if (cambiarUrl) history.replaceState(null, '', `#${nombre}`);
+      pintar();
+    }
+
+    for (const boton of botonesHerramienta) {
+      boton.addEventListener('click', () => elegirHerramienta(boton.dataset.herramienta));
+    }
+
+    /* ---------- Subir: botón, arrastrar o pegar ---------- */
+    entrada.addEventListener('change', () => {
+      cargar(entrada.files[0]);
+      entrada.value = '';
+    });
+
+    campos.otra.addEventListener('click', () => entrada.click());
+
+    let contadorArrastre = 0;
+    const llevaArchivos = (evento) => [...(evento.dataTransfer?.types || [])].includes('Files');
+
+    window.addEventListener('dragenter', (evento) => {
+      if (!llevaArchivos(evento)) return;
+      contadorArrastre += 1;
+      principal.toggleAttribute('data-arrastrando', true);
+    });
+
+    window.addEventListener('dragleave', () => {
+      contadorArrastre = Math.max(0, contadorArrastre - 1);
+      if (contadorArrastre === 0) principal.removeAttribute('data-arrastrando');
+    });
+
+    window.addEventListener('dragover', (evento) => {
+      if (llevaArchivos(evento)) evento.preventDefault();
+    });
+
+    window.addEventListener('drop', (evento) => {
+      if (!llevaArchivos(evento)) return;
+      evento.preventDefault();
+      contadorArrastre = 0;
+      principal.removeAttribute('data-arrastrando');
+      cargar(evento.dataTransfer.files[0]);
+    });
+
+    document.addEventListener('paste', (evento) => {
+      const archivo = [...(evento.clipboardData?.files || [])].find((item) => item.type.startsWith('image/'));
+      if (!archivo) return;
+      evento.preventDefault();
+      cargar(archivo);
+    });
+
+    /* ---------- Inicio ---------- */
+    if (!admite('image/webp')) {
+      const webp = [...campos.formato].find((opcion) => opcion.value === 'image/webp');
+      webp.disabled = true;
+    }
+    elegirHerramienta(location.hash.slice(1) || 'redimensionar', false);
+  </script>
+</body>
+</html>

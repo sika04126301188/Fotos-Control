@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFT Monalisa · Texto de relleno</title>
+  <meta name="description" content="Genera texto de relleno por párrafos, frases, palabras o listas y cópialo con un clic.">
+  <meta name="theme-color" content="#38b6f5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2338b6f5'/%3E%3Cpath d='M9 22V10l7 8 7-8v12' fill='none' stroke='%230f1b2a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap" rel="stylesheet">
+
+  <style>
+    a {
+      text-decoration: none;
+      color: var(--cielo-oscuro);
+    }
+
+    /* ---------- Variables ---------- */
+    :root {
+      --fondo: #ffffff;
+      --suave: #f3f7fa;
+      --tinta: #0f1b2a;
+      --gris: #5b6b7b;
+      --linea: #e1e8ef;
+      --cielo: #38b6f5;
+      --cielo-hover: #1ea6ec;
+      --cielo-oscuro: #0a76b2;
+      --cielo-claro: #e4f5fe;
+      --radio: 18px;
+      --radio-control: 10px;
+      --sombra: 0 1px 2px rgba(15, 27, 42, 0.04), 0 16px 40px -24px rgba(15, 27, 42, 0.22);
+      --fuente: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --fuente-codigo: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --i-color: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7H16a5 5 0 0 0 5-5c0-4.1-4-7.2-9-7.2z'/%3E%3Ccircle cx='7.5' cy='11.5' r='1'/%3E%3Ccircle cx='10.5' cy='7.5' r='1'/%3E%3Ccircle cx='15.5' cy='8.5' r='1'/%3E%3C/svg%3E");
+      --i-texto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h10'/%3E%3C/svg%3E");
+      --i-fotos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='2'/%3E%3Cpath d='m21 16-5-5-9 9'/%3E%3C/svg%3E");
+      --i-copiar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h8'/%3E%3C/svg%3E");
+      --i-recargar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12a9 9 0 1 1-2.64-6.36'/%3E%3Cpath d='M21 3v6h-6'/%3E%3C/svg%3E");
+      --i-mas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+      --i-menos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+      color-scheme: light;
+    }
+
+    /* ---------- Base ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--fuente);
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    figure,
+    ul,
+    ol,
+    menu,
+    fieldset {
+      margin: 0;
+    }
+
+    ul,
+    ol,
+    menu {
+      padding: 0;
+      list-style: none;
+    }
+
+    fieldset {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      padding: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    select,
+    output,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: var(--cielo);
+      color: var(--tinta);
+    }
+
+    /* ---------- Iconos ---------- */
+    [data-icono]::before {
+      content: "";
+      flex: none;
+      width: 18px;
+      height: 18px;
+      background: currentColor;
+      -webkit-mask: var(--icono) center / contain no-repeat;
+      mask: var(--icono) center / contain no-repeat;
+    }
+
+    [data-icono="color"] {
+      --icono: var(--i-color);
+    }
+
+    [data-icono="texto"] {
+      --icono: var(--i-texto);
+    }
+
+    [data-icono="fotos"] {
+      --icono: var(--i-fotos);
+    }
+
+    [data-icono="copiar"] {
+      --icono: var(--i-copiar);
+    }
+
+    [data-icono="recargar"] {
+      --icono: var(--i-recargar);
+    }
+
+    [data-icono="mas"] {
+      --icono: var(--i-mas);
+    }
+
+    [data-icono="menos"] {
+      --icono: var(--i-menos);
+    }
+
+    /* ---------- Cabecera: tres botones para moverse ---------- */
+    body > header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--linea);
+      background: rgba(255, 255, 255, 0.88);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    body > header nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    body > header nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    body > header nav a:hover:not([aria-current="page"]) {
+      border-color: var(--cielo);
+      box-shadow: 0 8px 18px -10px rgba(56, 182, 245, 0.7);
+      transform: translateY(-1px);
+    }
+
+    body > header nav a[aria-current="page"] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    /* ---------- Contenido ---------- */
+    main {
+      flex: 1;
+      width: min(1120px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    main > section {
+      padding-block: clamp(28px, 5vw, 56px);
+    }
+
+    main article {
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      background: var(--fondo);
+      box-shadow: var(--sombra);
+    }
+
+    /* Botones */
+    main button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background-color 0.15s, transform 0.15s;
+    }
+
+    main button:hover:not(:disabled) {
+      border-color: var(--cielo);
+    }
+
+    main button:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    main button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    main button[aria-pressed="true"],
+    main button[data-principal] {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main button[data-principal]:hover:not(:disabled) {
+      border-color: var(--cielo-hover);
+      background: var(--cielo-hover);
+    }
+
+    /* Opciones tipo píldora (radios) */
+    main label:has(> input[type="radio"]) {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--linea);
+      border-radius: 999px;
+      color: var(--tinta);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    main label:has(> input[type="radio"]):hover {
+      border-color: var(--cielo);
+    }
+
+    main label > input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    main label:has(> input[type="radio"]:checked) {
+      border-color: var(--cielo);
+      background: var(--cielo);
+      font-weight: 600;
+    }
+
+    main label:has(> input[type="radio"]:focus-visible) {
+      outline: 2px solid var(--cielo-oscuro);
+      outline-offset: 2px;
+    }
+
+    main label:has(> input[type="radio"]:disabled) {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Campos */
+    main input[type="number"],
+    main input[type="text"],
+    main select {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-control);
+      background: var(--fondo);
+      color: var(--tinta);
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    main input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    main input[type="number"]::-webkit-outer-spin-button,
+    main input[type="number"]::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+
+    main input:hover,
+    main select:hover {
+      border-color: #c9d6e2;
+    }
+
+    main input:focus-visible,
+    main select:focus-visible {
+      outline: none;
+      border-color: var(--cielo);
+      box-shadow: 0 0 0 3px rgba(56, 182, 245, 0.25);
+    }
+
+    main input[type="range"] {
+      width: 100%;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    main label:has(> input[type="checkbox"]) {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--tinta);
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    main input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--cielo);
+      cursor: pointer;
+    }
+
+    /* ---------- Pie ---------- */
+    body > footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px 20px;
+      width: min(1120px, 100% - 32px);
+      margin: 40px auto 0;
+      padding-block: 22px 28px;
+      border-top: 1px solid var(--linea);
+      color: var(--gris);
+      font-size: 0.875rem;
+    }
+
+    body > footer strong {
+      color: var(--tinta);
+      font-weight: 600;
+    }
+
+    /* ---------- Aviso ---------- */
+    body > output {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      z-index: 30;
+      max-width: min(92vw, 440px);
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--tinta);
+      color: #ffffff;
+      font-size: 0.9rem;
+      box-shadow: 0 14px 32px -14px rgba(15, 27, 42, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 16px);
+      transition: opacity 0.2s, transform 0.25s;
+    }
+
+    body > output[data-visible] {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Área temporal para copiar en navegadores antiguos */
+    body > textarea {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    @media (max-width: 520px) {
+      body > header {
+        padding-inline: 10px;
+      }
+
+      body > header nav {
+        gap: 6px;
+      }
+
+      body > header nav a {
+        gap: 6px;
+        padding: 9px 14px;
+        font-size: 0.9rem;
+      }
+
+      body > header nav a[data-icono]::before {
+        width: 16px;
+        height: 16px;
+      }
+
+      body > footer {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+      }
+    }
+
+    main > section:first-of-type h1 {
+      margin-bottom: 20px;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    main > section > article {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 32px;
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    /* ---------- Ajustes ---------- */
+    article > form {
+      display: grid;
+      align-content: start;
+      gap: 22px;
+    }
+
+    article > form fieldset {
+      display: grid;
+      gap: 8px;
+    }
+
+    article > form legend {
+      margin-bottom: 8px;
+      color: var(--gris);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    article > form fieldset:first-of-type {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    article > form fieldset:nth-of-type(2) {
+      grid-template-columns: 42px minmax(0, 1fr) 42px;
+    }
+
+    article > form fieldset:nth-of-type(2) button {
+      padding: 0;
+    }
+
+    article > form fieldset:nth-of-type(2) input {
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    article > form > button {
+      justify-self: start;
+    }
+
+    /* ---------- Resultado ---------- */
+    article > section {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    article > section > header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    article > section > header fieldset {
+      display: flex;
+      gap: 6px;
+    }
+
+    article > section > section {
+      min-height: 340px;
+      max-height: 540px;
+      padding: 22px 24px;
+      overflow: auto;
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      background: var(--suave);
+      line-height: 1.75;
+    }
+
+    article > section > section p + p {
+      margin-top: 14px;
+    }
+
+    article > section > section ul {
+      padding-left: 20px;
+      list-style: disc;
+    }
+
+    article > section > section li + li {
+      margin-top: 6px;
+    }
+
+    article > section > section pre {
+      margin: 0;
+      color: #23405c;
+      font-family: var(--fuente-codigo);
+      font-size: 0.85rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    article > section > p small {
+      color: var(--gris);
+      font-size: 0.85rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 820px) {
+      main > section > article {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      article > section > section {
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Herramientas">
+      <a href="index.html" data-icono="color">Color</a>
+      <a href="texto.html" data-icono="texto" aria-current="page">Texto</a>
+      <a href="fotos.html" data-icono="fotos">Fotos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="titulo">
+      <h1 id="titulo">Texto de relleno</h1>
+      <article>
+        <form aria-label="Ajustes del texto">
+          <fieldset>
+            <legend>Tipo</legend>
+            <label><input type="radio" name="tipo" value="parrafos" checked>Párrafos</label>
+            <label><input type="radio" name="tipo" value="frases">Frases</label>
+            <label><input type="radio" name="tipo" value="palabras">Palabras</label>
+            <label><input type="radio" name="tipo" value="lista">Lista</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Cantidad</legend>
+            <button type="button" data-paso="-1" data-icono="menos" aria-label="Menos"></button>
+            <input type="number" name="cantidad" value="3" min="1" max="50" step="1" inputmode="numeric" aria-label="Cantidad">
+            <button type="button" data-paso="1" data-icono="mas" aria-label="Más"></button>
+          </fieldset>
+
+          <label><input type="checkbox" name="clasico" checked>Empezar con «Lorem ipsum»</label>
+          <button type="button" name="otro" data-icono="recargar">Generar otro</button>
+        </form>
+
+        <section aria-label="Resultado">
+          <header>
+            <fieldset aria-label="Formato al copiar">
+              <label><input type="radio" name="formato" value="texto" checked>Texto</label>
+              <label><input type="radio" name="formato" value="html">HTML</label>
+            </fieldset>
+            <button type="button" data-accion="copiar" data-icono="copiar" data-principal>Copiar</button>
+          </header>
+          <section tabindex="0" aria-label="Texto generado"></section>
+          <p><small></small></p>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <strong>CFT Monalisa</strong>
+    <p>Personalizado por Samir®</p>
+    <small>© 2026</small>
+  </footer>
+
+  <output id="aviso" role="status" aria-live="polite"></output>
+
+  <script>
+    'use strict';
+
+    /* ---------- Utilidades comunes ---------- */
+    const aviso = document.getElementById('aviso');
+    let temporizadorAviso;
+
+    function avisar(mensaje) {
+      aviso.value = mensaje;
+      aviso.toggleAttribute('data-visible', true);
+      clearTimeout(temporizadorAviso);
+      temporizadorAviso = setTimeout(() => aviso.removeAttribute('data-visible'), 2400);
+    }
+
+    async function copiar(texto, mensaje = `Copiado: ${texto}`) {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Sin portapapeles');
+        await navigator.clipboard.writeText(texto);
+      } catch {
+        // Método clásico para navegadores sin portapapeles moderno
+        const enfocado = document.activeElement;
+        const area = document.createElement('textarea');
+        area.value = texto;
+        area.readOnly = true;
+        document.body.append(area);
+        area.select();
+        const copiado = document.execCommand('copy');
+        area.remove();
+        if (enfocado instanceof HTMLElement) enfocado.focus({ preventScroll: true });
+        if (!copiado) {
+          avisar('No se pudo copiar. Selecciónalo y pulsa Ctrl + C.');
+          return false;
+        }
+      }
+      avisar(mensaje);
+      return true;
+    }
+
+    function descargar(blob, nombre) {
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement('a');
+      enlace.href = url;
+      enlace.download = nombre;
+      document.body.append(enlace);
+      enlace.click();
+      enlace.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    function limitar(valor, minimo, maximo) {
+      return Math.min(Math.max(valor, minimo), maximo);
+    }
+
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    /* ---------- Datos ---------- */
+    const PALABRAS = `
+      lorem ipsum dolor sit amet consectetur adipiscing elit sed eiusmod tempor incididunt labore dolore magna aliqua
+      enim minim veniam quis nostrud exercitation ullamco laboris nisi aliquip commodo consequat duis aute irure
+      reprehenderit voluptate velit esse cillum fugiat nulla pariatur excepteur sint occaecat cupidatat proident sunt
+      culpa officia deserunt mollit anim laborum curabitur pulvinar facilisi proin pretium vitae purus massa tristique
+      habitant morbi tellus placerat porta gravida lacinia scelerisque quisque ornare erat taciti pellentesque cursus
+      maecenas aptent himenaeos nostra blandit risus rhoncus facilisis quam justo sem euismod habitasse arcu semper
+      convallis fermentum sagittis dapibus ultricies malesuada vehicula congue eget sodales luctus feugiat nibh turpis
+      libero fringilla mattis tortor condimentum sapien fusce vulputate eleifend ligula
+    `.trim().split(/\s+/);
+    const LIMITES = { parrafos: 50, frases: 100, palabras: 1000, lista: 50 };
+    const CLASICO = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    const INICIO_PALABRAS = ['lorem', 'ipsum', 'dolor', 'sit', 'amet'];
+    const numero = new Intl.NumberFormat('es-ES');
+
+    /* ---------- Elementos ---------- */
+    const formulario = document.querySelector('main form');
+    const campos = formulario.elements;
+    const resultado = document.querySelector('main article > section');
+    const salida = resultado.querySelector('section');
+    const cuenta = resultado.querySelector('p small');
+
+    const estado = { tipo: 'parrafos', cantidad: 3, clasico: true, formato: 'texto', elementos: [] };
+
+    /* ---------- Generador ---------- */
+    const azar = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+    const palabra = () => PALABRAS[azar(0, PALABRAS.length - 1)];
+    const mayuscula = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
+
+    function frase(minimo = 6, maximo = 14) {
+      const total = azar(minimo, maximo);
+      const palabras = Array.from({ length: total }, palabra);
+      if (total > 7) palabras[azar(2, total - 4)] += ',';
+      return `${mayuscula(palabras.join(' '))}.`;
+    }
+
+    const NUEVO = {
+      parrafos: () => Array.from({ length: azar(3, 6) }, () => frase()).join(' '),
+      frases: () => frase(5, 12),
+      palabras: palabra,
+      lista: () => frase(4, 9),
+    };
+
+    // Al subir la cantidad se añaden elementos; lo que ya había se conserva
+    function elementosActuales() {
+      while (estado.elementos.length < estado.cantidad) estado.elementos.push(NUEVO[estado.tipo]());
+      const lista = estado.elementos.slice(0, estado.cantidad);
+      if (!estado.clasico) return lista;
+      if (estado.tipo === 'parrafos') lista[0] = `${CLASICO} ${lista[0]}`;
+      else if (estado.tipo === 'palabras') INICIO_PALABRAS.slice(0, lista.length).forEach((p, i) => { lista[i] = p; });
+      else lista[0] = CLASICO;
+      return lista;
+    }
+
+    function textoPlano(lista) {
+      if (estado.tipo === 'parrafos') return lista.join('\n\n');
+      if (estado.tipo === 'frases') return lista.join('\n');
+      if (estado.tipo === 'palabras') return `${mayuscula(lista.join(' '))}.`;
+      return lista.map((elemento) => `• ${elemento}`).join('\n');
+    }
+
+    function codigoHtml(lista) {
+      if (estado.tipo === 'palabras') return `<p>${mayuscula(lista.join(' '))}.</p>`;
+      if (estado.tipo === 'lista') return `<ul>\n${lista.map((elemento) => `  <li>${elemento}</li>`).join('\n')}\n</ul>`;
+      return lista.map((elemento) => `<p>${elemento}</p>`).join('\n');
+    }
+
+    function crear(etiqueta, texto) {
+      const elemento = document.createElement(etiqueta);
+      elemento.textContent = texto;
+      return elemento;
+    }
+
+    function textoParaCopiar() {
+      const lista = elementosActuales();
+      return estado.formato === 'html' ? codigoHtml(lista) : textoPlano(lista);
+    }
+
+    /* ---------- Pintado ---------- */
+    function pintar(origen = null) {
+      const lista = elementosActuales();
+
+      if (estado.formato === 'html') {
+        salida.replaceChildren(crear('pre', codigoHtml(lista)));
+      } else if (estado.tipo === 'lista') {
+        const listado = document.createElement('ul');
+        listado.append(...lista.map((elemento) => crear('li', elemento)));
+        salida.replaceChildren(listado);
+      } else {
+        const bloques = estado.tipo === 'palabras' ? [`${mayuscula(lista.join(' '))}.`] : lista;
+        salida.replaceChildren(...bloques.map((bloque) => crear('p', bloque)));
+      }
+
+      const plano = textoPlano(lista);
+      const totalPalabras = plano.split(/\s+/).filter((trozo) => /[a-z]/i.test(trozo)).length;
+      const caracteres = (estado.formato === 'html' ? codigoHtml(lista) : plano).length;
+      cuenta.textContent = `${numero.format(totalPalabras)} palabras, ${numero.format(caracteres)} caracteres`;
+
+      campos.cantidad.max = LIMITES[estado.tipo];
+      if (origen !== 'cantidad') campos.cantidad.value = estado.cantidad;
+    }
+
+    function fijarCantidad(valor, origen = null) {
+      const maximo = LIMITES[estado.tipo];
+      if (valor > maximo) {
+        avisar(`El máximo son ${numero.format(maximo)}.`);
+        origen = null;
+      }
+      estado.cantidad = limitar(Math.round(valor), 1, maximo);
+      pintar(origen);
+    }
+
+    /* ---------- Eventos ---------- */
+    formulario.addEventListener('change', (evento) => {
+      const { name } = evento.target;
+      if (name === 'tipo') {
+        estado.tipo = evento.target.value;
+        estado.elementos = [];
+        fijarCantidad(Math.min(estado.cantidad, LIMITES[estado.tipo]));
+      } else if (name === 'clasico') {
+        estado.clasico = evento.target.checked;
+        pintar();
+      } else if (name === 'cantidad') {
+        pintar();
+      }
+    });
+
+    campos.cantidad.addEventListener('input', () => {
+      const valor = Number(campos.cantidad.value);
+      if (Number.isFinite(valor) && valor >= 1) fijarCantidad(valor, 'cantidad');
+    });
+
+    formulario.addEventListener('click', (evento) => {
+      const paso = evento.target.closest('button[data-paso]');
+      if (paso) fijarCantidad(estado.cantidad + Number(paso.dataset.paso));
+    });
+
+    formulario.addEventListener('submit', (evento) => evento.preventDefault());
+
+    campos.otro.addEventListener('click', () => {
+      estado.elementos = [];
+      pintar();
+      salida.scrollTop = 0;
+    });
+
+    resultado.querySelector('fieldset').addEventListener('change', (evento) => {
+      estado.formato = evento.target.value;
+      pintar();
+    });
+
+    resultado.querySelector('button[data-accion="copiar"]').addEventListener('click', () => {
+      copiar(textoParaCopiar(), estado.formato === 'html' ? 'HTML copiado' : 'Texto copiado');
+    });
+
+    pintar();
+  </script>
+</body>
+</html>
